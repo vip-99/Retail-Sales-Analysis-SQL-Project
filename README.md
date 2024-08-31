@@ -235,4 +235,25 @@ ORDER BY total_cogs DESC;
 ```
 
 
---------------------**END**----------------------------
+
+## Findings
+
+**Customer Demographics**: Customers of all ages purchase across categories like Clothing and Beauty.
+**High-Value Transactions**: Several transactions had a total sale amount greater than 1000, indicating premium purchases.
+**Sales Trends**: Monthly analysis shows variations in sales, helping identify peak seasons.
+**Customer Insights**: Top customers and popular products identified.
+
+## Conclusion
+
+This project introducing SQL for data analysts, covering setup, cleaning, analysis, and business-driven queries to inform sales, customer, and product decisions.
+
+
+## Author - Vipin Karunakaran
+
+This project is part of my portfolio, showcasing the SQL skills essential for data analyst roles. 
+
+
+
+                                **END**
+
+
