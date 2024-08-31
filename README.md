@@ -82,7 +82,7 @@ SELECT * FROM retail_sales
 
 1 **How many total sales we have**?
 
-SELECT COUNT(*) AS total_sales From retail_sales;
+```sql SELECT COUNT(*) AS total_sales From retail_sales; ```
 
 
 
