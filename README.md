@@ -81,15 +81,18 @@ SELECT * FROM retail_sales
 
 
 1 **How many total sales we have**?
+
 SELECT COUNT(*) AS total_sales From retail_sales;
 
 
 
 2 **How many unique Customers we have**?
+
 SELECT COUNT(DISTINCT customer_id) AS total_customers From retail_sales;
 
 
 3 **How many unique Category we have**?
+
 SELECT category FROM retail_sales;
 
 
