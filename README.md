@@ -184,14 +184,28 @@ SELECT year,month,avg_sale FROM best_selling_year WHERE rn=1;
 
 
 
-8 **Write a SQL query to find the top 5 customers based on the highest total sales**?
+8 **Write a SQL query to find the top 10 customers based on the highest total sales**?
 
 ```sql
-SELECT customer_id AS customer,SUM(total_sale) AS total_sales 
-FROM retail_sales
-GROUP BY customer_id
-ORDER BY total_sales DESC
-LIMIT 5;
+WITH CTE AS (
+    SELECT
+        customer_id,
+        SUM(total_sale) AS sales
+    FROM retail_sales
+    GROUP BY customer_id
+),
+CTE2 AS (
+    SELECT
+        customer_id,
+        sales,
+        ROW_NUMBER() OVER (ORDER BY sales DESC) AS rn
+    FROM CTE
+)
+SELECT
+    customer_id,
+    sales
+FROM CTE2
+WHERE rn <= 10;
 ```
 
 
@@ -228,6 +242,39 @@ SELECT category,ROUND(SUM(cogs):: NUMERIC,1) AS total_cogs
 FROM retail_sales
 GROUP BY category
 ORDER BY total_cogs DESC;
+```
+
+
+12 **Which product categories sell the most**?
+
+```sql
+SELECT category,SUM(quantity) AS TOTAL_UNITS_SOLD,SUM(total_sale) AS TOTAL_REVENUE
+FROM retail_sales
+GROUP BY category
+ORDER BY TOTAL_REVENUE DESC;
+```
+
+
+13 **Do 20% of customers generate 80% of total revenue**?
+
+```sql
+WITH customer_sales AS (
+    SELECT customer_id,SUM(total_sale) AS revenue
+    FROM retail_sales
+    GROUP BY customer_id
+),
+revenue_rank AS (
+    SELECT customer_id,revenue,SUM(revenue) OVER () AS total_revenue, 
+	SUM(revenue) OVER (ORDER BY revenue DESC) AS running_revenue
+    FROM customer_sales
+)
+SELECT 
+    customer_id,
+    revenue,
+    running_revenue,
+    total_revenue
+FROM revenue_rank
+WHERE running_revenue <= 0.8 * total_revenue;
 ```
 
 
